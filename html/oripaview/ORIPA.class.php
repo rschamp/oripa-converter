@@ -59,13 +59,23 @@ class ORIPA{
 	
 	public function output_image(){
 		header("Content-type: image/png");
-		$this->image = @imagecreate($this->width+1, $this->height+1) 
+		$this->image = @imagecreatetruecolor($this->width+1, $this->height+1) 
 					or die("Could not create new Image!");
 		
+		imageantialias($this->image, true);		
 		$background = imagecolorallocate($this->image, 255,255,255);
 		
+		imagefill($this->image, 0,0, $background);
+		
+		$max = 1000;
+		$start = 40;
+
+		$increment = 0;
+
 		foreach($this->lines as $line){
-			$this->drawcrease($line);
+			if($increment >= $start and $increment < $max or true)
+				$this->drawcrease($line);
+			$increment++;
 		}
 		
 		imagepng($this->image);
@@ -76,19 +86,13 @@ class ORIPA{
 		
 		$linecolor  = imagecolorallocate($this->image, $this->linecolors[$line->type][0], $this->linecolors[$line->type][1], $this->linecolors[$line->type][2]);
 		
-//		$this->linecolors[0][2] = ($this->linecolors[0][2]+5)%255;
-//		$this->linecolors[1][1] = ($this->linecolors[1][1]+5)%255;
-//		$this->linecolors[2][0] = ($this->linecolors[2][0]+5)%255;
-//		$this->linecolors[3][2] = ($this->linecolors[3][2]+5)%255;
 		
 		$x0 = $this->resize($line->x0);
 		$x1 = $this->resize($line->x1);
 		$y0 = $this->resize($line->y0);
 		$y1 = $this->resize($line->y1);
 		
-//		imagefilledellipse($this->image, $x0,$y0, 5,5, $linecolor);
-//		imagefilledellipse($this->image, $x1,$y1, 5,5, $linecolor);
-		
+				
 		if(!imageline($this->image, $x1, $y1, $x0, $y0, $linecolor)) die("COULDN'T DRAW ($x0,$x1), ($y0,$y1)");
 	}
 	
@@ -113,7 +117,7 @@ class ORIPA{
 		
 		$factor = $this->width/$ps;
 	
-		return intval(round((($value+$increment)*$factor)));
+		return round((($value+$increment)*$factor));
 	
 	}
 	
@@ -161,7 +165,7 @@ class Line{
 				case "y0":
 				case "x1":
 				case "y1":
-					$returnLine[$datapoint['attributes']['property']] = 0+$datapoint['content']['double']['_v'];
+					$returnLine[$datapoint['attributes']['property']] = $datapoint['content']['double']['_v'];
 					break;
 			}
 		}

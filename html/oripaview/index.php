@@ -6,6 +6,10 @@ if($_GET['url']!==null):
 	}else{
 		$url = $_GET['url'];
 	}
+	
+endif;
+
+if ($_GET['view']=="image"):
 
 	require_once('ORIPA.class.php');
 	
@@ -18,19 +22,21 @@ if($_GET['url']!==null):
 	
 	$oripa = new ORIPA($raw);
 	
-	if($_GET['action'] != "Debug"){
-		$oripa->output_image();
-	}else{
+	if($_GET['action'] != "Debug"):
 	
-		echo "<pre>";
-//		print_r ($oripa->errors);
-		print_r ($oripa->lines);
-		
-//		print_r ($raw);
-		echo "</pre>";
-	}
+		$oripa->output_image();
+	
+	elseif($_GET['action'] == "Debug"):
+	
+		include("debug.php");
+	
+	endif;
+	
+elseif($_GET['view']=="info" && $url):
+
+	include("info.php");
 	
 else:
-	include("query.html");
+	include("enhanced_query.php");
 endif;
 ?>
