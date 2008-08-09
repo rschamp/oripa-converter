@@ -23,6 +23,7 @@
 <html>
 	<head>
 		<title>ORIPA Viewer</title>
+		<link rel="stylesheet" type="text/css" href="../style.css" />
 	</head>
 	<body>
 		<h1>ORIPA Viewer</h1>
