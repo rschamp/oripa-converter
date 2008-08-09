@@ -9,14 +9,30 @@ if($_GET['url']!==null):
 	
 endif;
 
-if ($_GET['view']=="image"):
+if (($_GET['view']=="image" || $_POST['view']=="image") && ($url || $_FILES) ):
 
 	require_once('ORIPA.class.php');
 	
-	ob_start();
-	passthru("wget -O- --quiet ". escapeshellarg($url));
-	$opx = ob_get_contents();
-	ob_clean();
+	if($url){
+	
+		ob_start();
+		passthru("wget -O- --quiet ". escapeshellarg($url));
+		$opx = ob_get_contents();
+		ob_clean();
+	
+	}elseif($_FILES){
+	
+		$opx = file_get_contents($_FILES['opxfile']['tmp_name']);
+		if($opx==""){
+			include("enhanced_query.php");
+			exit(0);
+		}
+		
+	}else{
+	
+		die("What did you do??");
+	
+	}
 	
 	$raw = xml2ary($opx);
 	

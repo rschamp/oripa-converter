@@ -36,6 +36,15 @@
 				<input type="hidden" name="view" value="info" />
 			</fieldset>
 		</form>
+		<form action="./" method="post" enctype="multipart/formdata">
+			<fieldset>
+				<legend>Choose a file on your computer</legend>
+				<label for="url_field">Upload:</label>
+				<input type="file" name="opxfile" id="filefield" />
+				<input type="submit" name="action" id="submit_button" value="Generate PNG" />
+				<input type="hidden" name="view" value="image" />
+			</fieldset>
+		</form>
 		<form action="./" method="get">
 			<fieldset>
 				<legend>Choose a file on my server</legend>
