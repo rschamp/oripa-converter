@@ -25,7 +25,7 @@
 		<title>ORIPA Viewer</title>
 		<link rel="stylesheet" type="text/css" href="../style.css" />
 	</head>
-	<body>
+	<body id="oripaview">
 		<h1>ORIPA Viewer</h1>
 		<p>If you would like to look at an ORIPA file but don't feel like opening it in ORIPA, you can use this to generate a PNG.</p>
 		<form action="./" method="get">

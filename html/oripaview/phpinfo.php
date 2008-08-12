@@ -1,1 +1,1 @@
-<?php print_r(gd_info()); ?>
+<?php print_r(phpinfo()); ?>

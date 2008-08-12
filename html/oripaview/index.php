@@ -38,9 +38,11 @@ if (($_GET['view']=="image" || $_POST['view']=="image") && ($url || $_FILES) ):
 	
 	$oripa = new ORIPA($raw);
 	
-	if($_GET['action'] != "Debug"):
+	if($_GET['action'] != "Debug" && $_POST['action'] !== "Debug"):
 	
-		$oripa->output_image();
+		if($_GET['size'] == "thumbnail") $size = 100;
+	
+		$oripa->output_image($size);
 	
 	elseif($_GET['action'] == "Debug"):
 	

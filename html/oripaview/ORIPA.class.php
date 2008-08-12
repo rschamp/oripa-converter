@@ -57,7 +57,13 @@ class ORIPA{
 	
 	}
 	
-	public function output_image(){
+	public function output_image($size = null){
+	
+		if($size != null){
+			$this->width = intval($size);
+			$this->height = intval($size);
+		}
+	
 		header("Content-type: image/png");
 		$this->image = @imagecreatetruecolor($this->width+1, $this->height+1) 
 					or die("Could not create new Image!");
