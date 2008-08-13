@@ -12,7 +12,7 @@
 	
 	$select = "<select name='url' id='urlselect'>\n\t<option value=''>Choose one</option>\n";
 	foreach($files as $file){
-		$select .= "\t<option value='http://fold.oclock.am/$file'>$file</option>\n";
+		$select .= "\t<option value='http://{$_SERVER['SERVER_NAME']}/$file'>$file</option>\n";
 	}
 	
 	$select .= "</select>\n";

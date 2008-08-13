@@ -7,7 +7,16 @@ class ORIPA{
 	
 	public $errors = array();
 	
-	public $rawdata;
+	public $raw_data;
+	private $line_data;
+	
+	public $size;
+	public $title;
+	public $editor;
+	public $author;
+	public $reference;
+	public $memo;
+	
 	public $width = 800;
 	public $height = 800;
 	
@@ -17,27 +26,44 @@ class ORIPA{
 
 	public function __construct($opxdata){
 	
-		$this->rawdata = $opxdata;
+		$this->raw_data = $opxdata;
+		$this->process_metadata();
 		
-		$all_line_xml_data = $this->get_all_line_xml_data();
-		
-		foreach($all_line_xml_data as $id => $line_array){
+		foreach($this->line_data as $id => $line_array){
 			
 			$this->add_XML_line($line_array);
 		}
+			
+	}
+	
+	public function process_metadata(){
+		foreach($this->raw_data['java']['content']['object']['content']['void'] as $node){
+			switch($node['attributes']['property']){
+				case "lines":
+					$this->line_data = $node['content']['array']['content']['void'];
+					break;
+				case "editorName":
+					$this->editor = $node['content']['string']['_v'];
+					break;
+				case "title":
+					$this->title = $node['content']['string']['_v'];
+					break;
+				case "paperSize":
+					$this->size = $node['content']['double']['_v'];
+					break;
+				case "originalAuthorName":
+					$this->author = $node['content']['string']['_v'];
+					break;
+				case "reference":
+					$this->reference = $node['content']['string']['_v'];
+					break;
+				case "memo":
+					$this->memo = $node['content']['string']['_v'];
+					break;
+			}
+		}
+	}
 		
-//		$this->height = $this->width = $this->get_paper_size();
-	
-	}
-	
-	public function get_all_line_xml_data(){
-		return $this->rawdata['java']['content']['object']['content']['void'][0]['content']['array']['content']['void'];
-	}
-	
-	public function get_paper_size(){
-		return (float) $this->rawdata['java']['content']['object']['content']['void'][2]['content']['double']['_v'];
-	}
-	
 	private function add_XML_line($line_array){
 		
 		$new_line = new Line($line_array);
@@ -102,26 +128,11 @@ class ORIPA{
 		if(!imageline($this->image, $x1, $y1, $x0, $y0, $linecolor)) die("COULDN'T DRAW ($x0,$x1), ($y0,$y1)");
 	}
 	
-	public function debug(){
-		
-		$debugvars = array(
-			"get_paper_size()"=>$this->get_paper_size(),
-			"width"=>$this->width
-		);
-		
-		foreach($debugvars as $label => $value){
-			$return .= "$label: $value\n";
-		}
-		
-		return $return;
-	}
 	
 	public function resize($value){
-		$ps = $this->get_paper_size();
-	
-		$increment = $ps/2;
+		$increment = $this->size/2;
 		
-		$factor = $this->width/$ps;
+		$factor = $this->width/$this->size;
 	
 		return round((($value+$increment)*$factor));
 	

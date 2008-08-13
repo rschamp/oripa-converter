@@ -1,7 +1,9 @@
 <pre>
 <?php
-		print_r ($oripa->lines);		
-//		print_r ($raw);
+		echo ($oripa->title . "\n");
+
+		print_r ($oripa);
+		print_r ($raw);
 
 ?>
 </pre>

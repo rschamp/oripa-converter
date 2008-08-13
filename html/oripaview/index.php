@@ -9,7 +9,7 @@ if($_GET['url']!==null):
 	
 endif;
 
-if (($_GET['view']=="image" || $_POST['view']=="image") && ($url || $_FILES) ):
+if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['view'] == "debug") && ($url || $_FILES) ):
 
 	require_once('ORIPA.class.php');
 	
@@ -38,21 +38,22 @@ if (($_GET['view']=="image" || $_POST['view']=="image") && ($url || $_FILES) ):
 	
 	$oripa = new ORIPA($raw);
 	
-	if($_GET['action'] != "Debug" && $_POST['action'] !== "Debug"):
+	if($_REQUEST['view'] == "image"):
 	
 		if($_GET['size'] == "thumbnail") $size = 100;
 	
 		$oripa->output_image($size);
 	
-	elseif($_GET['action'] == "Debug"):
+	elseif($_REQUEST['view']=="info"):
+	
+		include("info.php");
+		
+	elseif($_REQUEST['view'] == "debug"):
 	
 		include("debug.php");
 	
 	endif;
 	
-elseif($_GET['view']=="info" && $url):
-
-	include("info.php");
 	
 else:
 	include("enhanced_query.php");
