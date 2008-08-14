@@ -18,7 +18,6 @@ $metadata = array(
 	
 foreach($metadata as $label => $metacontent){
 	if($metacontent){
-		$metacontent = htmlentities($metacontent);
 		$metacontent = str_replace("\n", "<br />", $metacontent);
 		$metadata_copy .= "<h3>$label</h3>\n<p class='metacontent'>$metacontent</p>\n";
 	}
@@ -30,6 +29,7 @@ if($metadata_copy){
 
 	
 
+	header("Content-Type: text/html; charset=utf-8");
 
 ?>		
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
