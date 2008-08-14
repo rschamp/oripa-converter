@@ -5,13 +5,14 @@ if($oripa->title){
 	$title = basename($url);
 }
 
+$filename = basename($url);
+
 $embedtext = <<<EOT
 <a href="{$_SERVER['SCRIPT_URI']}?url=$url&view=info" title="View full size"><img src="{$_SERVER['SCRIPT_URI']}?url=$url&view=image&size=thumbnail" title="$title" /></a>
 EOT;
 
 $metadata = array(
-	"Title" => $oripa->title, 
-	"Original Author" => $oripa->author, 
+	"Author" => $oripa->author, 
 	"Editor" => $oripa->editor, 
 	"Reference" => $oripa->reference, 
 	"Notes" => $oripa->memo);
@@ -21,10 +22,6 @@ foreach($metadata as $label => $metacontent){
 		$metacontent = str_replace("\n", "<br />", $metacontent);
 		$metadata_copy .= "<h3>$label</h3>\n<p class='metacontent'>$metacontent</p>\n";
 	}
-}
-
-if($metadata_copy){
-	$metadata_copy = "<h2>Metadata</h2>\n$metadata_copy";
 }
 
 	
@@ -39,16 +36,17 @@ if($metadata_copy){
 		<link rel="stylesheet" type="text/css" href="../style.css" />
 	</head>
 	<body>
-		<h1><?php echo $title; ?></h1>
+		<h1><a href="<?php echo $_SERVER['SCRIPT_URI'];?>">ORIPA Viewer</a></h1>
 		
-		<h2>Image</h2>
+		<h2><?php echo $title; ?></h2>
 		<p>(size has been reduced, download or right click and "View image" for full size):</p>
 		<img src="<?php echo $_SERVER['SCRIPT_URI']; ?>?url=<?php echo $url; ?>&view=image" class="maxsizeimage"/>
 
-		<h2>Original ORIPA File</h2>
-		<p><a href="<?php echo $url; ?>"><?php echo $title ?></a></p>
-		
 		<?php echo $metadata_copy; ?>
+
+		<h2>Original ORIPA File</h2>
+		<p><a href="<?php echo $url; ?>"><?php echo $filename; ?></a></p>
+		
 
 		<h2>Thumbnail Embed Code</h2>
 		<code>
