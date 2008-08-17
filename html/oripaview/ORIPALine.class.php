@@ -1,17 +1,10 @@
 <?php
-class Line{
+require_once('Line.class.php');
 
-	public $x0;
-	public $x1;
-	public $y0;
-	public $y1;
-	
+class ORIPALine extends Line{
+
 	public $rawdata;
 	public $problems;
-	
-	public $type;
-	
-	private $valid = false;
 	
 	public function __construct($linedata){
 		
@@ -60,13 +53,11 @@ class Line{
 		}
 	}
 	
-	public function isValid(){
-		return $this->valid;
-	}
-	
 	public function get_problems(){
-		foreach($this->problems as $problem){
-			$message .= "$problem \n";
+		if($this->problems && is_array($this->problems)){
+			foreach($this->problems as $problem){
+				$message .= "$problem \n";
+			}
 		}
 		
 		return $message;

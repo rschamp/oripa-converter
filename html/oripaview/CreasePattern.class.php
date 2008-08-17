@@ -11,8 +11,6 @@ class CreasePattern{
 	public $title;
 	public $editor;
 	public $author;
-	public $reference;
-	public $memo;
 	
 	public $width = 800;
 	public $height = 800;
