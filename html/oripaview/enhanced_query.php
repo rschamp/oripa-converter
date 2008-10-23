@@ -38,7 +38,7 @@
 				<input type="hidden" name="view" value="info" />
 			</fieldset>
 		</form>
-		<form action="./" method="post" enctype="multipart/formdata">
+		<form action="./" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Choose a file on your computer</legend>
 				<label for="url_field">Upload:</label>
