@@ -1,11 +1,9 @@
 <?php
-require_once('xmltoarray.php');
 require_once('ORIPALine.class.php');
 require_once('CreasePattern.class.php');
 
 class ORIPA extends CreasePattern{
 
-	public $raw_data;
 	private $line_data;
 	
 	public $reference;
@@ -25,28 +23,28 @@ class ORIPA extends CreasePattern{
 	}
 	
 	public function process_metadata(){
-		foreach($this->raw_data['java']['content']['object']['content']['void'] as $node){
-			switch($node['attributes']['property']){
+		foreach($this->raw_data->object->void as $node){
+			switch($node->attributes()->property){
 				case "lines":
-					$this->line_data = $node['content']['array']['content']['void'];
+					$this->line_data = $node->array->void;
 					break;
 				case "editorName":
-					$this->editor = $node['content']['string']['_v'];
+					$this->editor = $node->string;
 					break;
 				case "title":
-					$this->title = $node['content']['string']['_v'];
+					$this->title = $node->string;
 					break;
 				case "paperSize":
-					$this->size = $node['content']['double']['_v'];
+					$this->size = $node->double;
 					break;
 				case "originalAuthorName":
-					$this->author = $node['content']['string']['_v'];
+					$this->author = $node->string;
 					break;
 				case "reference":
-					$this->reference = $node['content']['string']['_v'];
+					$this->reference = $node->string;
 					break;
 				case "memo":
-					$this->memo = $node['content']['string']['_v'];
+					$this->memo = $node->string;
 					break;
 			}
 		}

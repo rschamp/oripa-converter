@@ -19,6 +19,8 @@ class CreasePattern{
 	
 	public $image;
 
+	public $raw_data;
+
 	public function __construct(){
 			
 	}
@@ -57,7 +59,12 @@ class CreasePattern{
 	
 	public function drawcrease($line){
 		
-		$linecolor  = imagecolorallocate($this->image, $this->linecolors[$line->type][0], $this->linecolors[$line->type][1], $this->linecolors[$line->type][2]);
+		$linecolor  = imagecolorallocate(
+						$this->image, 
+						$this->linecolors[$line->type][0], 
+						$this->linecolors[$line->type][1], 
+						$this->linecolors[$line->type][2]
+					  );
 		
 		
 		$x0 = $this->resize($line->x0);
@@ -77,6 +84,18 @@ class CreasePattern{
 	
 		return round((($value+$increment)*$factor));
 	
+	}
+
+	public function import_file($path){
+		$handle = fopen($path, 'rb');
+		
+		if(preg_match('/^[a-zA-Z]+:\/\//',$path)){
+			
+			$this->raw_data = stream_get_contents($handle);
+		
+		}else{
+			$this->raw_data = fread($handle, filesize($path));
+		}
 	}
 	
 }

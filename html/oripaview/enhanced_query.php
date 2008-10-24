@@ -16,8 +16,8 @@
 	}
 	
 	$select .= "</select>\n";
-
-
+	
+	
 	header("Content-Type: text/html; charset=utf-8");
 	
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -41,7 +41,7 @@
 		<form action="./" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Choose a file on your computer</legend>
-				<label for="url_field">Upload:</label>
+				<label for="filefield">Upload:</label>
 				<input type="file" name="opxfile" id="filefield" />
 				<input type="submit" name="action" id="submit_button" value="Generate PNG" />
 				<input type="hidden" name="view" value="image" />

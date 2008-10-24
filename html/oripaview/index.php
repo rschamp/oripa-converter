@@ -15,6 +15,7 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	
 	if($url){
 	
+#		$opx = file_get_contents("lightning.opx");
 		ob_start();
 		passthru("wget -O- --quiet ". escapeshellarg($url));
 		$opx = ob_get_contents();
@@ -34,7 +35,7 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	
 	}
 	
-	$raw = xml2ary($opx);
+	$raw = simplexml_load_string($opx);
 	
 	$oripa = new ORIPA($raw);
 	
@@ -43,6 +44,7 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 		if($_GET['size'] == "thumbnail") $size = 100;
 	
 		$oripa->output_image($size);
+//		echo "<pre>".print_r($oripa,true),"</pre>";
 	
 	elseif($_REQUEST['view']=="info"):
 	

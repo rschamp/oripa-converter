@@ -23,18 +23,18 @@ class ORIPALine extends Line{
 	}
 
 	public function get_line_data(){
-		$linecontent = $this->rawdata['content']['object']['content']['void'];
+		$linecontent = $this->rawdata->object->void;
 		foreach($linecontent as $datapoint){
-			switch($datapoint['attributes']['property'])
+			switch($datapoint->attributes()->property)
 			{
 				case "type":
-					$returnLine['type'] = $datapoint['content']['int']['_v'];
+					$returnLine['type'] = (int) $datapoint->int[0];
 					break;
 				case "x0":
 				case "y0":
 				case "x1":
 				case "y1":
-					$returnLine[$datapoint['attributes']['property']] = $datapoint['content']['double']['_v'];
+					$returnLine["{$datapoint->attributes()->property}"] = (float) $datapoint->double[0];
 					break;
 			}
 		}
