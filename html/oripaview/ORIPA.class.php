@@ -8,13 +8,14 @@ class ORIPA extends CreasePattern{
 	
 	public $reference;
 	public $memo;
-	
 
-	public function __construct($opxdata){
+	public function __construct($file){
 	
-		$this->raw_data = $opxdata;
+		$this->file = $file;
+		$this->filename = basename($file);
+		$this->raw_data = simplexml_load_file($this->file);
 		$this->process_metadata();
-		
+				
 		foreach($this->line_data as $id => $line_array){
 			
 			$this->add_XML_line($line_array);
@@ -70,6 +71,5 @@ class ORIPA extends CreasePattern{
 	}
 	
 }
-
 
 ?>

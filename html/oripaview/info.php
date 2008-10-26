@@ -2,10 +2,10 @@
 if($oripa->title){
 	$title = $oripa->title;
 }else{
-	$title = basename($url);
+	$title = $oripa->filename;
 }
 
-$filename = basename($url);
+$filename = $oripa->filename;
 
 $embedtext = <<<EOT
 <a href="{$_SERVER['SCRIPT_URI']}?url=$url&view=info" title="View full size"><img src="{$_SERVER['SCRIPT_URI']}?url=$url&view=image&size=thumbnail" title="$title" /></a>

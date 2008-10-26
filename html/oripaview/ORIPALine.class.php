@@ -21,6 +21,12 @@ class ORIPALine extends Line{
 		$this->rawdata = null;
 	
 	}
+	
+	public function __toString(){
+		$data = $this->get_line_data();
+		
+		return "[({$data[x0]},{$data[y0]}), ({$data[x1]},{$data[y1]})]: Type {$data[type]}";
+	}
 
 	public function get_line_data(){
 		$linecontent = $this->rawdata->object->void;
