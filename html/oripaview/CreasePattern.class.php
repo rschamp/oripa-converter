@@ -9,6 +9,13 @@ class CreasePattern{
 
 	public $filename;
 	public $imagename;
+	public $imagetype;
+	public $imagetype_extension;
+	
+	public $imagetypes = array("png"=>"png", "jpg"=>"jpeg", "jpeg","jpg", "gif"=>"gif");
+	public $default_imagetype_extension = "png";
+	
+	static $params = array("url"=>"filepath","type"=>"imagetype_extension");
 	
 	public $size;
 	public $title;
@@ -36,7 +43,7 @@ class CreasePattern{
 			$this->height = intval($size);
 		}
 	
-		header("Content-type: image/png");
+		header("Content-type: image/{$this->imagetype_extension}");
 		header("Content-disposition: inline; filename={$this->imagename}");
 		$this->image = @imagecreatetruecolor($this->width+1, $this->height+1) 
 					or die("Could not create new Image!");
@@ -56,12 +63,12 @@ class CreasePattern{
 		foreach($this->lines as $line){
 			if($increment >= $start and $increment < $max or true){
 				$this->drawcrease($line);
-#				echo "Drawing $line";
 			}
 			$increment++;
 		}
 		
-		imagepng($this->image);
+		$f = $this->imagefunction;
+		$f($this->image);// !
 		imagedestroy($this->image);
 	}
 	

@@ -33,8 +33,14 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	
 	}
 	
+	if($_REQUEST['type']){
+		$type = $_REQUEST['type'];
+	}else{
+		$type = "";
+	}
 	
-	$oripa = new ORIPA($file, $filename);
+	
+	$oripa = new ORIPA($file, $filename, $type);
 	
 	if($_REQUEST['view'] == "image"):
 	

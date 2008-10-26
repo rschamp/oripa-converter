@@ -35,7 +35,12 @@
 				<legend>Enter your URL</legend>
 				<label for="url_field">URL:</label>
 				<input type="text" name="url" id="url_field" />
-				<input type="submit" name="action" id="submit_button" value="Generate PNG" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<select name="type" id="type_select">
+					<option value="png">PNG</option>
+					<option value="jpg">JPG</option>
+					<option value="gif">GIF</option>
+				</select>
 				<input type="hidden" name="view" value="info" />
 			</fieldset>
 		</form>
@@ -44,7 +49,12 @@
 				<legend>Choose a file on your computer</legend>
 				<label for="filefield">Upload:</label>
 				<input type="file" name="opxfile" id="filefield" />
-				<input type="submit" name="action" id="submit_button" value="Generate PNG" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<select name="type" id="type_select">
+					<option value="png">PNG</option>
+					<option value="jpg">JPG</option>
+					<option value="gif">GIF</option>
+				</select>
 				<input type="hidden" name="view" value="image" />
 			</fieldset>
 		</form>
@@ -53,7 +63,13 @@
 				<legend>Choose a file on my server</legend>
 				<label for="url_field">URL:</label>
 				<?php echo $select; ?>
-				<input type="submit" name="action" id="submit_button" value="Generate PNG" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<select name="type" id="type_select">
+					<option value="png">PNG</option>
+					<option value="jpg">JPG</option>
+					<option value="gif">GIF</option>
+				</select>
+
 				<input type="hidden" name="view" value="info" />
 			</fieldset>
 		</form>

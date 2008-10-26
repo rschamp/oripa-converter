@@ -9,14 +9,23 @@ class ORIPA extends CreasePattern{
 	public $reference;
 	public $memo;
 
-	public function __construct($file, $filename=""){
+	public function __construct($file, $filename="", $type="png"){
 	
-		$this->file = $file;
-		if($filename!=""){
-			$file = $filename;
+		if(in_array($type, $this->imagetypes)){
+			$this->imagetype_extension = $type;
+		}else{
+			$this->imagetype_extension = $this->default_imagetype_extension;
 		}
-		$this->filename = basename($file);
-		$this->imagename = basename($file, ".opx").".png";
+		
+		$this->imagetype = $this->imagetypes[$this->imagetype_extension];
+		$this->imagefunction = "image{$this->imagetype}";
+		
+		$this->file = $file;
+		if($filename==""){
+			$filename = $file;
+		}
+		$this->filename = basename($filename);
+		$this->imagename = basename($filename, ".opx").".{$this->imagetype_extension}";
 		$this->raw_data = simplexml_load_file($this->file);
 		$this->process_metadata();
 				
@@ -25,6 +34,15 @@ class ORIPA extends CreasePattern{
 			$this->add_XML_line($line_array);
 		}
 			
+	}
+	
+	public function map($key,$var){
+		return implode("=",array($key,$this->$var));
+	}
+	
+	public function __toString(){
+		$callback = array($this,"map");
+		return implode("&", array_map($callback,array_keys(self::$params),array_values(self::$params)));
 	}
 	
 	public function process_metadata(){
