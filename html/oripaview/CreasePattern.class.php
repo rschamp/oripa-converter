@@ -8,6 +8,8 @@ class CreasePattern{
 	public $errors = array();
 
 	public $filename;
+	public $imagename;
+	
 	public $size;
 	public $title;
 	public $editor;
@@ -34,17 +36,15 @@ class CreasePattern{
 			$this->height = intval($size);
 		}
 	
-#		header("Content-type: image/png");
-#		header("Content-disposition: inline; filename=");
+		header("Content-type: image/png");
+		header("Content-disposition: inline; filename={$this->imagename}");
 		$this->image = @imagecreatetruecolor($this->width+1, $this->height+1) 
 					or die("Could not create new Image!");
 		
-		echo "Image antialias...".
 		imageantialias($this->image, true);		
 		
 		$background = imagecolorallocate($this->image, 255,255,255);
 		
-		echo "Background: ". $background;
 		
 		imagefill($this->image, 0,0, $background);
 		
@@ -56,13 +56,13 @@ class CreasePattern{
 		foreach($this->lines as $line){
 			if($increment >= $start and $increment < $max or true){
 				$this->drawcrease($line);
-				echo "Drawing $line";
+#				echo "Drawing $line";
 			}
 			$increment++;
 		}
 		
-#		imagepng($this->image);
-#		imagedestroy($this->image);
+		imagepng($this->image);
+		imagedestroy($this->image);
 	}
 	
 	public function drawcrease($line){

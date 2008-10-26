@@ -10,7 +10,7 @@ class ORIPALine extends Line{
 		
 		$this->rawdata = $linedata;
 		
-		$points = self::get_line_data($this->rawdata);
+		$points = $this->get_line_data();
 			
 		if($points){
 			$this->valid = true;
@@ -18,7 +18,7 @@ class ORIPALine extends Line{
 			   = array($points['type'], $points['x0'], $points['x1'], $points['y0'], $points['y1']);
 		}
 		
-		$this->rawdata = null;
+#		$this->rawdata = null;
 	
 	}
 	
@@ -30,6 +30,7 @@ class ORIPALine extends Line{
 
 	public function get_line_data(){
 		$linecontent = $this->rawdata->object->void;
+#		echo "<pre>".print_r($this->rawdata,true)."</pre>";
 		foreach($linecontent as $datapoint){
 			switch($datapoint->attributes()->property)
 			{

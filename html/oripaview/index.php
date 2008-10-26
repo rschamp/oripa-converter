@@ -16,11 +16,13 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	if($url){
 		
 		$file = $url;
+		$filename = "";
 	
 	}elseif($_FILES){
 	
 		$file = $_FILES['opxfile']['tmp_name'];
-		if($opx==""){
+		$filename = $_FILES['opxfile']['name'];
+		if($file==""){
 			include("enhanced_query.php");
 			exit(0);
 		}
@@ -32,14 +34,14 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	}
 	
 	
-	$oripa = new ORIPA($file);
+	$oripa = new ORIPA($file, $filename);
 	
 	if($_REQUEST['view'] == "image"):
 	
 		if($_GET['size'] == "thumbnail") $size = 100;
 	
-//		$oripa->output_image($size);
-		echo "<pre>".print_r($oripa,true),"</pre>";
+		$oripa->output_image($size);
+//		echo "<pre>".print_r($oripa,true),"</pre>";
 	
 	elseif($_REQUEST['view']=="info"):
 	

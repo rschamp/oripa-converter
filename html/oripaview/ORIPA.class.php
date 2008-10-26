@@ -9,10 +9,14 @@ class ORIPA extends CreasePattern{
 	public $reference;
 	public $memo;
 
-	public function __construct($file){
+	public function __construct($file, $filename=""){
 	
 		$this->file = $file;
+		if($filename!=""){
+			$file = $filename;
+		}
 		$this->filename = basename($file);
+		$this->imagename = basename($file, ".opx").".png";
 		$this->raw_data = simplexml_load_file($this->file);
 		$this->process_metadata();
 				

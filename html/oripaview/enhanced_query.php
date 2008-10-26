@@ -3,7 +3,7 @@
 	$foldoclock = dir("..");
 
 	while(false !== ($file = $foldoclock->read())){
-		if (substr($file, -3 , 3) == "opx"){
+		if (substr($file, -4 , 4) == ".opx"){
 			$files[] = $file;
 		}
 	}
@@ -29,6 +29,7 @@
 	<body id="oripaview">
 		<h1>ORIPA Viewer</h1>
 		<p>If you would like to look at an ORIPA file but don't feel like opening it in ORIPA, you can use this to generate a PNG.</p>
+		<?php #if($_FILES) echo "<pre>".print_r($_FILES, true)."</pre>"; ?>
 		<form action="./" method="get">
 			<fieldset>
 				<legend>Enter your URL</legend>
