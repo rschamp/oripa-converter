@@ -16,7 +16,7 @@ if (($_REQUEST['view']=="image" || $_REQUEST['view'] == "info" || $_REQUEST['vie
 	if($url){
 		
 		$file = $url;
-		$filename = "";
+		$filename = $url;
 	
 	}elseif($_FILES){
 	

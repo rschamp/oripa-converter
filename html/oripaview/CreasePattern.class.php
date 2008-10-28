@@ -8,6 +8,7 @@ class CreasePattern{
 	public $errors = array();
 
 	public $filename;
+	public $file;
 	public $imagename;
 	public $imagetype;
 	public $imagetype_extension;
@@ -15,7 +16,7 @@ class CreasePattern{
 	public $imagetypes = array("png"=>"png", "jpg"=>"jpeg", "jpeg","jpg", "gif"=>"gif");
 	public $default_imagetype_extension = "png";
 	
-	static $params = array("url"=>"filepath","type"=>"imagetype_extension");
+	static $params = array("url"=>"file","type"=>"imagetype_extension");
 	
 	public $size;
 	public $title;
