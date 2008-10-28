@@ -29,48 +29,49 @@
 	<body id="oripaview">
 		<h1>ORIPA Viewer</h1>
 		<p>If you would like to look at an ORIPA file but don't feel like opening it in ORIPA, you can use this to generate a PNG.</p>
-		<?php #if($_FILES) echo "<pre>".print_r($_FILES, true)."</pre>"; ?>
 		<form action="./" method="get">
 			<fieldset>
 				<legend>Enter your URL</legend>
+				<input type="hidden" name="view" value="info" />
 				<label for="url_field">URL:</label>
 				<input type="text" name="url" id="url_field" />
-				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<label for="type_select">Type:</label>
 				<select name="type" id="type_select">
 					<option value="png">PNG</option>
 					<option value="jpg">JPG</option>
 					<option value="gif">GIF</option>
 				</select>
-				<input type="hidden" name="view" value="info" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
 			</fieldset>
 		</form>
 		<form action="./" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Choose a file on your computer</legend>
+				<input type="hidden" name="view" value="info" />
 				<label for="filefield">Upload:</label>
 				<input type="file" name="opxfile" id="filefield" />
-				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<label for="type_select">Type:</label>
 				<select name="type" id="type_select">
 					<option value="png">PNG</option>
 					<option value="jpg">JPG</option>
 					<option value="gif">GIF</option>
 				</select>
-				<input type="hidden" name="view" value="image" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
 			</fieldset>
 		</form>
 		<form action="./" method="get">
 			<fieldset>
 				<legend>Choose a file on my server</legend>
+				<input type="hidden" name="view" value="info" />
 				<label for="url_field">URL:</label>
 				<?php echo $select; ?>
-				<input type="submit" name="action" id="submit_button" value="Generate" />
+				<label for="type_select">Type:</label>
 				<select name="type" id="type_select">
 					<option value="png">PNG</option>
 					<option value="jpg">JPG</option>
 					<option value="gif">GIF</option>
 				</select>
-
-				<input type="hidden" name="view" value="info" />
+				<input type="submit" name="action" id="submit_button" value="Generate" />
 			</fieldset>
 		</form>
 		<?php include("generalinfo.php"); ?>
